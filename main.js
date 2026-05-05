@@ -14,7 +14,11 @@ const loader = document.getElementById('loader');
 const progressBar = document.getElementById('progressBar');
 const statusMsg = document.getElementById('statusMsg');
 const analysisResult = document.getElementById('analysisResult');
-const resultText = document.getElementById('resultText');
+
+const bugName = document.getElementById('bugName');
+const probabilityText = document.getElementById('probabilityText');
+const probBarInner = document.getElementById('probBarInner');
+const controlMethod = document.getElementById('controlMethod');
 
 // 테마 관리
 const savedTheme = localStorage.getItem('theme') || 'light';
@@ -57,7 +61,7 @@ fileInput.addEventListener('change', (e) => {
 
 function handleFiles(file) {
   if (!file.type.startsWith('image/')) {
-    alert('이미지 파일(JPG, PNG, WEBP)만 업로드 가능합니다.');
+    alert('이미지 파일만 업로드 가능합니다.');
     return;
   }
 
@@ -80,7 +84,7 @@ removeBtn.addEventListener('click', () => {
   resultSection.style.display = 'none';
 });
 
-// 정밀 분석 시뮬레이션
+// AI 벌레 분석 시뮬레이션
 analyzeBtn.addEventListener('click', () => {
   analyzeBtn.disabled = true;
   resultSection.style.display = 'block';
@@ -89,32 +93,59 @@ analyzeBtn.addEventListener('click', () => {
   
   let progress = 0;
   const interval = setInterval(() => {
-    progress += Math.random() * 15;
+    progress += Math.random() * 12;
     if (progress > 100) progress = 100;
     
     progressBar.style.width = progress + '%';
     
-    if (progress < 30) statusMsg.textContent = '이미지 픽셀 데이터 로드 중...';
-    else if (progress < 60) statusMsg.textContent = '패턴 분석 및 버그 대조 중...';
-    else if (progress < 90) statusMsg.textContent = '최종 분석 리포트 생성 중...';
-    else statusMsg.textContent = '완료되었습니다!';
+    if (progress < 25) statusMsg.textContent = '이미지 특징점을 추출하고 있습니다...';
+    else if (progress < 50) statusMsg.textContent = '재미나이 AI가 곤충 데이터베이스와 대조 중...';
+    else if (progress < 75) statusMsg.textContent = '방제 가이드 및 추천 약제를 검색 중...';
+    else statusMsg.textContent = '분석이 완료되었습니다!';
 
     if (progress === 100) {
       clearInterval(interval);
-      setTimeout(showResult, 500);
+      setTimeout(showResult, 600);
     }
-  }, 200);
+  }, 250);
 });
 
 function showResult() {
   loader.style.display = 'none';
   analysisResult.style.display = 'block';
   
-  const results = [
-    "✅ 분석 결과: 훌륭합니다! 이미지에서 눈에 띄는 디자인 결함이나 버그가 발견되지 않았습니다. 현재 가이드라인을 잘 따르고 있습니다.",
-    "⚠️ 분석 결과: 일부 영역에서 색상 대비(Contrast)가 낮아 가독성이 떨어질 수 있습니다. 텍스트 색상을 조금 더 어둡게 조정하는 것을 추천합니다.",
-    "🚀 분석 결과: 이미지가 웹 최적화 기준보다 큽니다. 로딩 속도를 위해 WebP 형식으로 변환하거나 용량을 압축할 필요가 있습니다.",
-    "🔍 분석 결과: 레이아웃의 좌우 여백이 불균형합니다. 중앙 정렬을 재검토해보시기 바랍니다."
+  // 가상의 데이터베이스 (Gemini 분석 결과 시뮬레이션)
+  const bugs = [
+    {
+      name: "독일바퀴 (German Cockroach)",
+      prob: 94,
+      method: "주방이나 습한 곳에 주로 서식합니다. 식독제(베이트 건)를 설치하고 갈라진 틈새를 실리콘으로 메우세요. 피프로닐 성분의 약제를 추천합니다."
+    },
+    {
+      name: "집그리마 (House Centipede)",
+      prob: 88,
+      method: "해충을 잡아먹는 익충이지만 혐오감을 줄 수 있습니다. 습기 제거가 가장 중요하며, 창틀이나 배수구에 잔류 분무용 살충제를 뿌려두세요."
+    },
+    {
+      name: "권연벌레 (Cigarette Beetle)",
+      prob: 91,
+      method: "오래된 곡물이나 말린 나물에서 발생합니다. 발생 근원지를 찾아 폐기하는 것이 우선이며, 페로몬 트랩을 설치하여 성충을 포획하세요."
+    },
+    {
+      name: "애수시렁이 (Black Carpet Beetle)",
+      prob: 82,
+      method: "옷장이나 섬유류에 피해를 줍니다. 옷장을 정리하고 나프탈렌 등 방충제를 비치하세요. 심할 경우 델타메트린 성분의 살충제를 사용하세요."
+    }
   ];
-  resultText.textContent = results[Math.floor(Math.random() * results.length)];
+  
+  const result = bugs[Math.floor(Math.random() * bugs.length)];
+  
+  bugName.textContent = result.name;
+  probabilityText.textContent = result.prob + '%';
+  controlMethod.textContent = result.method;
+  
+  // 확률 바 애니메이션
+  setTimeout(() => {
+    probBarInner.style.width = result.prob + '%';
+  }, 100);
 }
