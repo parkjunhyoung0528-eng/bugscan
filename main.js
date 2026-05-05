@@ -11,10 +11,12 @@ const removeBtn = document.getElementById('removeBtn');
 const analyzeBtn = document.getElementById('analyzeBtn');
 const resultSection = document.getElementById('resultSection');
 const loader = document.getElementById('loader');
+const progressBar = document.getElementById('progressBar');
+const statusMsg = document.getElementById('statusMsg');
 const analysisResult = document.getElementById('analysisResult');
 const resultText = document.getElementById('resultText');
 
-// --- 테마 관리 ---
+// 테마 관리
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
 
@@ -31,22 +33,22 @@ function setTheme(theme) {
   themeText.textContent = theme === 'dark' ? '라이트 모드' : '다크 모드';
 }
 
-// --- 파일 업로드 관리 ---
+// 파일 업로드
 dropZone.addEventListener('click', () => fileInput.click());
 
 dropZone.addEventListener('dragover', (e) => {
   e.preventDefault();
-  dropZone.classList.add('drag-over');
+  dropZone.style.borderColor = 'var(--primary-color)';
 });
 
-['dragleave', 'drop'].forEach(event => {
-  dropZone.addEventListener(event, () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('dragleave', () => {
+  dropZone.style.borderColor = 'var(--border-color)';
 });
 
 dropZone.addEventListener('drop', (e) => {
   e.preventDefault();
-  const files = e.dataTransfer.files;
-  if (files.length) handleFiles(files[0]);
+  dropZone.style.borderColor = 'var(--border-color)';
+  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files[0]);
 });
 
 fileInput.addEventListener('change', (e) => {
@@ -55,7 +57,7 @@ fileInput.addEventListener('change', (e) => {
 
 function handleFiles(file) {
   if (!file.type.startsWith('image/')) {
-    alert('이미지 파일만 업로드 가능합니다.');
+    alert('이미지 파일(JPG, PNG, WEBP)만 업로드 가능합니다.');
     return;
   }
 
@@ -78,25 +80,41 @@ removeBtn.addEventListener('click', () => {
   resultSection.style.display = 'none';
 });
 
-// --- 분석 시뮬레이션 ---
+// 정밀 분석 시뮬레이션
 analyzeBtn.addEventListener('click', () => {
   analyzeBtn.disabled = true;
   resultSection.style.display = 'block';
   loader.style.display = 'block';
   analysisResult.style.display = 'none';
-
-  // 실제 분석 대신 시뮬레이션 (2초 대기)
-  setTimeout(() => {
-    loader.style.display = 'none';
-    analysisResult.style.display = 'block';
+  
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
     
-    const responses = [
-      "이미지에서 3개의 잠재적인 UI 버그가 발견되었습니다. 버튼 대조비가 낮습니다.",
-      "코드 구조적 결함은 발견되지 않았습니다. 디자인 가이드라인을 잘 준수하고 있습니다.",
-      "로딩 속도에 영향을 줄 수 있는 고용량 이미지가 감지되었습니다. 압축을 권장합니다.",
-      "모바일 화면에서 텍스트 겹침 현상이 발생할 가능성이 있습니다."
-    ];
-    resultText.textContent = responses[Math.floor(Math.random() * responses.length)];
-    analyzeBtn.disabled = false;
-  }, 2000);
+    progressBar.style.width = progress + '%';
+    
+    if (progress < 30) statusMsg.textContent = '이미지 픽셀 데이터 로드 중...';
+    else if (progress < 60) statusMsg.textContent = '패턴 분석 및 버그 대조 중...';
+    else if (progress < 90) statusMsg.textContent = '최종 분석 리포트 생성 중...';
+    else statusMsg.textContent = '완료되었습니다!';
+
+    if (progress === 100) {
+      clearInterval(interval);
+      setTimeout(showResult, 500);
+    }
+  }, 200);
 });
+
+function showResult() {
+  loader.style.display = 'none';
+  analysisResult.style.display = 'block';
+  
+  const results = [
+    "✅ 분석 결과: 훌륭합니다! 이미지에서 눈에 띄는 디자인 결함이나 버그가 발견되지 않았습니다. 현재 가이드라인을 잘 따르고 있습니다.",
+    "⚠️ 분석 결과: 일부 영역에서 색상 대비(Contrast)가 낮아 가독성이 떨어질 수 있습니다. 텍스트 색상을 조금 더 어둡게 조정하는 것을 추천합니다.",
+    "🚀 분석 결과: 이미지가 웹 최적화 기준보다 큽니다. 로딩 속도를 위해 WebP 형식으로 변환하거나 용량을 압축할 필요가 있습니다.",
+    "🔍 분석 결과: 레이아웃의 좌우 여백이 불균형합니다. 중앙 정렬을 재검토해보시기 바랍니다."
+  ];
+  resultText.textContent = results[Math.floor(Math.random() * results.length)];
+}
