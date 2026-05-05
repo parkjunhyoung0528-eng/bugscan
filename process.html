@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>정밀 분해 세척 공정 | 크렉스(CLEANEXPRESS)</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    .process-detail-page { padding-top: 100px; background: #fdfdfd; }
+    .process-hero { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+    .process-hero h1 { font-size: 2.2rem; margin-bottom: 15px; }
+    
+    .process-card-list { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .process-card { background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); }
+    .process-card h3 { font-size: 1.4rem; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+    .process-card h3 span { background: var(--primary); color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1rem; }
+    .process-card ul { list-style: none; padding-left: 5px; }
+    .process-card li { margin-bottom: 10px; color: #444; position: relative; padding-left: 20px; font-size: 1.05rem; }
+    .process-card li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+
+    .spec-box { background: #eef6ff; padding: 30px; border-radius: 20px; max-width: 900px; margin: 60px auto; }
+    .spec-box h2 { font-size: 1.6rem; margin-bottom: 20px; text-align: center; }
+    .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .spec-item { display: flex; flex-direction: column; gap: 5px; }
+    .spec-item .label { font-weight: 700; color: var(--primary); font-size: 0.9rem; }
+    .spec-item .value { font-size: 1.1rem; font-weight: 500; }
+
+    @media (max-width: 600px) {
+      .spec-grid { grid-template-columns: 1fr; }
+      .process-hero h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">CLEAN<span>EXPRESS</span></a>
+      <div class="nav-links">
+        <a href="index.html">홈으로</a>
+        <a href="index.html#process">주요공정</a>
+      </div>
+      <a href="tel:1577-7648" class="nav-call">상담예약</a>
+    </div>
+  </nav>
+
+  <main class="process-detail-page">
+    <section class="process-hero">
+      <div class="container">
+        <h1>시스템에어컨 종합세척 표준 공정</h1>
+        <p>조달청 등록 과업지시서를 준수하는 크렉스만의 정밀 세척 가이드라인입니다.</p>
+      </div>
+    </section>
+
+    <div class="process-card-list">
+      <div class="process-card">
+        <h3><span>1</span> 사전 작업 및 시운전</h3>
+        <ul>
+          <li>시공 전 냉난방기 상태 및 배전반 사전 점검 실시</li>
+          <li>작업 주변 먼지 비산 방지를 위한 세척 깔개 및 보양 실시</li>
+          <li>전원 차단 및 안전 사고 예방 조치</li>
+        </ul>
+      </div>
+
+      <div class="process-card">
+        <h3><span>2</span> 정밀 분해 작업</h3>
+        <ul>
+          <li>프런트 판넬, 필터, 필터그릴 정밀 분리</li>
+          <li>PCB 컨트롤 박스 커버 분리 및 컨넥터 안전 결선 분리</li>
+          <li>드레인판(물받이) 및 응축수 제거</li>
+          <li>송풍팬 및 팬모터 본체로부터 완전 탈거</li>
+        </ul>
+      </div>
+
+      <div class="process-card">
+        <h3><span>3</span> 전문 보양 작업</h3>
+        <ul>
+          <li>미분리 PCB 및 전원 단자대 전용 커버 보양</li>
+          <li>냉각핀(열교환기) 세척용 전용 세척 가대 설치</li>
+          <li>세척수 비산 및 천장 텍스 가루 방지 보양</li>
+        </ul>
+      </div>
+
+      <div class="process-card">
+        <h3><span>4</span> 정밀 고압 세척</h3>
+        <ul>
+          <li>친환경 전용 세제 도포 후 찌든 때 불림 작업</li>
+          <li>고압 세척기로 냉각핀 및 송풍팬 심부 오염물 제거</li>
+          <li>필터, 그릴, 판넬 등 탈거 부품 개별 고압 세척</li>
+          <li>스티로폼 재질 부품은 파손 방지를 위해 압력 20% 조절 세척</li>
+        </ul>
+      </div>
+
+      <div class="process-card">
+        <h3><span>5</span> 살균 및 건조</h3>
+        <ul>
+          <li>고온 스팀 살균기로 미세 세균 완벽 박멸</li>
+          <li>송풍기를 이용한 부품별 물기 제거 및 완전 건조</li>
+          <li>PCB 접점 부활제를 이용한 접점 활성화 및 먼지 제거</li>
+        </ul>
+      </div>
+
+      <div class="process-card">
+        <h3><span>6</span> 조립 및 최종 시운전</h3>
+        <ul>
+          <li>분해 역순으로 정밀 조립 (PCB 체결 상태 집중 확인)</li>
+          <li>충분한 시간 동안 냉/난방 시운전 실시</li>
+          <li>운전 상태 점검 및 최종 하자 유무 전수 조사</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="spec-box container">
+      <h2>공정 표준 사양 (Specification)</h2>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <span class="label">세척 방식</span>
+          <span class="value">완전분해세척 (조달청 과업지시서 준수)</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">세척 범위</span>
+          <span class="value">필터, 그릴, 판넬, 드레인, 송풍팬, 열교환기</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">사용 장비</span>
+          <span class="value">크란즐 고압세척기, 아쿠아파워 고압세척기</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">사용 약품</span>
+          <span class="value">핀코일크리너, 에바브라이트, 칼크린 (3종)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section container" style="background: none; padding: 40px 0;">
+      <a href="tel:1577-7648" class="btn-primary">전문 엔지니어 상담 연결</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>크렉스(CLEANEXPRESS) | 대표번호: 1577-7648</p>
+      <p class="copy">&copy; 2026 CLEANEXPRESS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="mobile-sticky-bar">
+    <a href="tel:1577-7648">📞 1577-7648 전화상담예약</a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
