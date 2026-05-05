@@ -3,7 +3,7 @@ const themeIcon = document.getElementById('themeIcon');
 const themeText = document.getElementById('themeText');
 const html = document.documentElement;
 
-// Check for saved theme preference
+// 저장된 테마 설정 확인
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
 
@@ -19,9 +19,9 @@ function setTheme(theme) {
   
   if (theme === 'dark') {
     themeIcon.textContent = '☀️';
-    themeText.textContent = 'Light Mode';
+    themeText.textContent = '라이트 모드';
   } else {
     themeIcon.textContent = '🌙';
-    themeText.textContent = 'Dark Mode';
+    themeText.textContent = '다크 모드';
   }
 }
